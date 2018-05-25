@@ -10,9 +10,6 @@
 
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
   
-  <link href="https://fonts.googleapis.com/css?family=Martel:400,900|Poppins:400,900" rel="stylesheet">
-    
-
 <style>
     /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -62,27 +59,69 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
-.serif {
-  font-family: 'Martel';
-}
-
-.sans-serif {
-  font-family: 'Poppins';
-}
-
 body {
   background-color: #fff;
+  background: rgb(48,48,187);
+background: linear-gradient(90deg, rgba(48,48,187,1) 35%, rgba(0,212,255,1) 100%);  
   color: #3b4040;
   font-family: 'Martel';
   font-size: 22px;
 
 }
+
+
+* {
+    box-sizing: border-box;
+}
 </style>
 
 </head>
 
-<body>
-test
+<body class="bg-washed-red sans-serif">
+        <section class="center vh-100 flex justify-center items-center white tc">
+            <div>  
+                <form>
+                    <fieldset class="ba b--transparent">
+                        <div class="mb3">
+                            <label class="db fw6 lh-copy f5 ttu mb2 tracked" for="time">Wakeup time</label>
+                            <input class="pa3 input-reset ba b--white bg-transparent w-100 white f6" type="time" name="time" id="time">
+                        </div>
+                        <div class="mb3">
+                            <label class="db fw6 lh-copy f5 ttu mb2 tracked" for="pod">Podcast URL</label>
+                            <input class="pa3 input-reset ba b--white bg-transparent w-100 white f6" type="pod" name="pod"  id="pod">
+                        </div>
+                        <button class="f6 link dim ba ph4 pv3 mb2 dib black bg-white bw0 ttu w-100">Add a new alarm</button>                        
+                    </fieldset>
+                </form> 
+            </div>
+            <!-- <div id="clockbox" class="f4 b mb4"></div>    -->
+
+
+        </section>
+        <script type="text/javascript">
+            tday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+            tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+            
+            function GetClock(){
+            var d=new Date();
+            var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getFullYear();
+            var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+            
+            if(nhour==0){ap=" AM";nhour=12;}
+            else if(nhour<12){ap=" AM";}
+            else if(nhour==12){ap=" PM";}
+            else if(nhour>12){ap=" PM";nhour-=12;}
+            
+            if(nmin<=9) nmin="0"+nmin;
+            if(nsec<=9) nsec="0"+nsec;
+            
+            document.getElementById('clockbox').innerHTML=""+tday[nday]+", "+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+            }
+            
+            window.onload=function(){
+            GetClock();
+            setInterval(GetClock,1000);
+            }
+            </script>        
 </body>
 </html>
